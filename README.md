@@ -1,6 +1,6 @@
 # Harada Goal Decomposition
 
-A reusable Codex skill for turning an ambitious goal into a concrete plan using the Harada Method and its Open Window 64 matrix.
+An agent skill for turning an ambitious goal into a practical plan using the Harada Method and its Open Window 64 matrix. The instructions are written in the open [Agent Skills format](https://agentskills.io/specification) and are designed for compatible agents, including Claude Code, Codex, Hermes Agent, and OpenCode.
 
 The skill helps you clarify a goal, map the areas that support it, identify actionable steps, and choose a realistic set of priorities for the next one or two weeks. You can also use it to review an existing plan and adjust it based on actual progress.
 
@@ -17,34 +17,72 @@ The Open Window 64 has 81 cells: one central goal, eight supporting areas in the
 
 ## Installation
 
-### macOS and Linux
+Git is required for the commands below. Choose a destination supported by your agent; the destination directory must be named `harada-goal-decomposition` and contain `SKILL.md` directly. If it already exists, review it before replacing it. Restart the agent or start a new session if the skill does not appear.
 
-Clone this repository into your personal Codex skills directory:
+### Shared directory: Codex, Hermes Agent, and OpenCode
+
+Codex and OpenCode discover `~/.agents/skills` by default. Hermes Agent can use this directory when configured as described below. Some installations use a different home directory.
+
+**macOS and Linux:**
 
 ```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/wh1tespirit/harada-goal-decomposition.git ~/.codex/skills/harada-goal-decomposition
+mkdir -p ~/.agents/skills
+git clone https://github.com/wh1tespirit/harada-goal-decomposition.git ~/.agents/skills/harada-goal-decomposition
 ```
 
-### Windows PowerShell
+**Windows PowerShell:**
 
 ```powershell
-New-Item -ItemType Directory -Force "$env:USERPROFILE\.codex\skills" | Out-Null
-git clone https://github.com/wh1tespirit/harada-goal-decomposition.git "$env:USERPROFILE\.codex\skills\harada-goal-decomposition"
+New-Item -ItemType Directory -Force "$HOME\.agents\skills" | Out-Null
+git clone https://github.com/wh1tespirit/harada-goal-decomposition.git "$HOME\.agents\skills\harada-goal-decomposition"
 ```
 
-If you use a custom `CODEX_HOME`, place the repository in its `skills/harada-goal-decomposition` directory instead. If the destination already exists, review it before replacing it. Restart Codex or start a new session if the skill does not appear immediately.
+### Hermes Agent configuration
+
+To share the installation above with Hermes, add the directory to `skills.external_dirs` in `~/.hermes/config.yaml` (merge it with existing settings):
+
+```yaml
+skills:
+  external_dirs:
+    - ~/.agents/skills
+```
+
+Alternatively, install directly into Hermes' native `~/.hermes/skills/harada-goal-decomposition` directory. A configured Hermes home or profile may change these paths. See the [Hermes skills documentation](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/skills.md).
+### Claude Code
+
+Use Claude Code's personal skills directory:
+
+**macOS and Linux:**
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/wh1tespirit/harada-goal-decomposition.git ~/.claude/skills/harada-goal-decomposition
+```
+
+**Windows PowerShell:**
+
+```powershell
+New-Item -ItemType Directory -Force "$HOME\.claude\skills" | Out-Null
+git clone https://github.com/wh1tespirit/harada-goal-decomposition.git "$HOME\.claude\skills\harada-goal-decomposition"
+```
+
+Local Claude Code skills are for local sessions; Claude cloud and Cowork sessions have separate skill availability. See [Claude Code's skill documentation](https://code.claude.com/docs/en/skills) for details.
+
+### Other agents and locations
+
+Place the repository in a skill directory your agent scans, or follow its instructions for importing an Agent Skills-compatible folder. Project-local locations and trust or permission settings vary by agent. Consult the documentation for [Codex](https://learn.chatgpt.com/docs/build-skills), [Hermes Agent](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/skills.md), or [OpenCode](https://opencode.ai/docs/skills). The optional `agents/openai.yaml` file provides Codex interface metadata; the portable instructions are in `SKILL.md` and do not depend on it.
 
 ## How to use it
 
-Invoke the skill in a Codex conversation and describe your goal:
+Ask your agent to use the skill and describe your goal:
 
 ```text
-$harada-goal-decomposition
-Help me break down this goal using the Harada Method:
-I want to launch a useful product within six months.
-I can spend five hours per week, and I am starting without a team.
+Use the harada-goal-decomposition skill to break down this goal
+with the Harada Method: I want to launch a useful product within
+six months. I can spend five hours per week and have no team yet.
 ```
+
+Depending on the agent, you can also invoke the skill by name: Claude Code and Hermes Agent support `/harada-goal-decomposition`; in Codex, select or mention `$harada-goal-decomposition`. Invocation and discovery depend on the agent and its configuration.
 
 Include the outcome you want, your desired timeline, your current situation, available time, and known constraints when you can. The skill asks for important missing information or labels assumptions when you request a draft.
 
@@ -53,14 +91,14 @@ For a full breakdown, ask for an **Open Window 64** matrix. For a lighter start,
 To revisit an existing plan, continue the conversation or provide the previous plan and an update:
 
 ```text
-$harada-goal-decomposition
-Review my Harada plan. Here is what I completed, what got stuck,
-and how much time I have next week: ...
+Use the harada-goal-decomposition skill to review my plan.
+Here is what I completed, what got stuck, and how much time
+I have next week: ...
 ```
 
 ## Scope and limitations
 
-This is an independent practical adaptation of the Harada Method. It is not an official Harada Institute product, a diagnostic assessment, or a guarantee of achieving a goal. The skill does not create external tasks or reminders unless you separately request and authorize those actions.
+This is an independent practical adaptation of the Harada Method. It is not an official Harada Institute product, a diagnostic assessment, or a guarantee of achieving a goal. The skill does not create external tasks or reminders unless you separately request and authorize those actions. Compatibility depends on the agent's skill support and configuration.
 
 ## Learn more
 
