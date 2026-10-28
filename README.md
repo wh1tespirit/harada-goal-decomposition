@@ -15,7 +15,41 @@ The skill helps you clarify a goal, map the areas that support it, identify acti
 
 The Open Window 64 has 81 cells: one central goal, eight supporting areas in the central grid, eight repeated area labels, and 64 surrounding action cells. It is a planning map, not a commitment to tackle everything at once. When information is missing, the skill marks open questions rather than inventing details.
 
-## Installation
+## Install with an AI agent
+
+Copy this prompt into your agent's chat. It asks the agent to choose the correct installation location for its environment and verify the installed files:
+
+```text
+Install the Harada Goal Decomposition skill from
+https://github.com/wh1tespirit/harada-goal-decomposition
+for use with this agent.
+
+1. Identify this agent and its documented skill discovery locations.
+   Use a user-level location by default, or a project location if I
+   explicitly request one. Respect any configured skill directories.
+2. Install the repository so SKILL.md is directly inside a directory
+   named harada-goal-decomposition. For Claude Code, a typical user
+   location is ~/.claude/skills; for Codex and OpenCode it is
+   ~/.agents/skills; for Hermes Agent it is ~/.hermes/skills. The
+   shared ~/.agents/skills location works with Hermes only when it is
+   configured as an external skill directory. Adapt paths to the OS
+   and the actual configuration.
+3. If the destination already exists, inspect it first. Do not
+   overwrite, delete, or reset existing files or discard local changes.
+   If it is already the requested skill, verify it and report its
+   status. If it conflicts or an update is needed, explain the options
+   and ask before changing it.
+4. Verify that SKILL.md exists, that its name is
+   harada-goal-decomposition, and that the chosen location is supported
+   by this agent. Check skill discovery if the agent provides a way to
+   do so; distinguish file verification from confirmed discovery.
+5. Tell me the installation path, verification result, how to invoke
+   the skill, and whether a new session or reload is needed. If access,
+   network, permissions, or discovery are unavailable, tell me what
+   remains and give me the next step instead of claiming success.
+```
+
+## Manual installation
 
 Git is required for the commands below. Choose a destination supported by your agent; the destination directory must be named `harada-goal-decomposition` and contain `SKILL.md` directly. If it already exists, review it before replacing it. Restart the agent or start a new session if the skill does not appear.
 
@@ -48,6 +82,7 @@ skills:
 ```
 
 Alternatively, install directly into Hermes' native `~/.hermes/skills/harada-goal-decomposition` directory. A configured Hermes home or profile may change these paths. See the [Hermes skills documentation](https://github.com/NousResearch/hermes-agent/blob/main/website/docs/user-guide/features/skills.md).
+
 ### Claude Code
 
 Use Claude Code's personal skills directory:
